@@ -44,13 +44,13 @@
 
   body {
     @apply bg-ginette-cream text-foreground antialiased;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236a9ad0' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply px-6 py-3 bg-ginette-gold text-ginette-navy font-sans font-semibold uppercase tracking-wider text-sm border border-ginette-gold hover:bg-transparent hover:text-ginette-gold transition-all duration-300;
+    @apply px-6 py-3 bg-ginette-blue text-white font-sans font-semibold uppercase tracking-wider text-sm border border-ginette-blue hover:bg-transparent hover:text-ginette-blue transition-all duration-300;
   }
   
   .section-title {
@@ -59,20 +59,20 @@
   
   .section-title::after {
     content: "";
-    @apply block absolute w-1/2 h-1 bg-ginette-gold bottom-0 left-0 mt-2;
+    @apply block absolute w-1/2 h-1 bg-ginette-blue bottom-0 left-0 mt-2;
   }
   
   .section-subtitle {
-    @apply font-sans text-sm uppercase tracking-widest text-ginette-gold mb-2;
+    @apply font-sans text-sm uppercase tracking-widest text-ginette-blue mb-2;
   }
   
   .elegant-card {
-    @apply bg-white bg-opacity-95 backdrop-blur-sm border border-ginette-gold/20 shadow-md p-6 md:p-8 relative overflow-hidden;
+    @apply bg-white bg-opacity-95 backdrop-blur-sm border border-ginette-blue/20 shadow-md p-6 md:p-8 relative overflow-hidden;
   }
   
   .elegant-card::before {
     content: "";
-    @apply absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-ginette-gold/50 to-ginette-gold;
+    @apply absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-ginette-blue/50 to-ginette-blue;
   }
   
   .parallax-bg {

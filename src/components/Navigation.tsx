@@ -2,11 +2,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,6 +19,24 @@ const Navigation = () => {
     
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // Check if we're on mobile and update state
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+      // Close mobile menu when resizing to desktop
+      if (window.innerWidth >= 768) {
+        setIsMenuOpen(false);
+      }
+    };
+    
+    // Check on mount
+    checkMobile();
+    
+    // Add resize listener
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   return (
@@ -33,7 +52,7 @@ const Navigation = () => {
           className="font-serif text-2xl md:text-3xl text-ginette-navy relative group"
         >
           <span className="block transform transition-transform group-hover:scale-105 duration-300">GINETTE</span>
-          <span className="absolute -bottom-1 left-0 w-0 group-hover:w-full h-0.5 bg-ginette-gold transition-all duration-500"></span>
+          <span className="absolute -bottom-1 left-0 w-0 group-hover:w-full h-0.5 bg-ginette-blue transition-all duration-500"></span>
         </Link>
         
         {/* Mobile Menu Button */}
@@ -42,7 +61,7 @@ const Navigation = () => {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
-          <Menu size={24} />
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
         
         {/* Desktop Menu */}
@@ -54,7 +73,7 @@ const Navigation = () => {
               className="font-sans text-sm uppercase tracking-wider text-ginette-navy relative group"
             >
               <span>{item}</span>
-              <span className="absolute -bottom-1 left-0 w-0 group-hover:w-full h-0.5 bg-ginette-gold transition-all duration-300"></span>
+              <span className="absolute -bottom-1 left-0 w-0 group-hover:w-full h-0.5 bg-ginette-blue transition-all duration-300"></span>
             </Link>
           ))}
           <a 
@@ -67,32 +86,34 @@ const Navigation = () => {
       </div>
       
       {/* Mobile Menu */}
-      <div
-        className={cn(
-          "fixed inset-0 bg-white bg-opacity-95 backdrop-blur-md pt-20 px-6 pb-6 z-40 transform transition-transform duration-300 ease-in-out",
-          isMenuOpen ? "translate-y-0" : "-translate-y-full"
-        )}
-      >
-        <div className="flex flex-col items-center gap-6">
-          {['Accueil', 'Menu', 'À Propos', 'Contact'].map((item, index) => (
-            <Link
-              key={index}
-              to={item === 'Accueil' ? '/' : `/${item.toLowerCase().replace(/\s+/g, '-')}`}
-              className="font-sans text-xl uppercase tracking-wider text-ginette-navy text-center py-3"
+      {isMobile && (
+        <div
+          className={cn(
+            "fixed inset-0 bg-white bg-opacity-95 backdrop-blur-md pt-20 px-6 pb-6 z-40 transform transition-transform duration-300 ease-in-out",
+            isMenuOpen ? "translate-y-0" : "-translate-y-full"
+          )}
+        >
+          <div className="flex flex-col items-center gap-6">
+            {['Accueil', 'Menu', 'À Propos', 'Contact'].map((item, index) => (
+              <Link
+                key={index}
+                to={item === 'Accueil' ? '/' : `/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                className="font-sans text-xl uppercase tracking-wider text-ginette-navy text-center py-3"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item}
+              </Link>
+            ))}
+            <a 
+              href="#reservation" 
+              className="btn-primary mt-4 w-full text-center"
               onClick={() => setIsMenuOpen(false)}
             >
-              {item}
-            </Link>
-          ))}
-          <a 
-            href="#reservation" 
-            className="btn-primary mt-4 w-full text-center"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Réserver
-          </a>
+              Réserver
+            </a>
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 };

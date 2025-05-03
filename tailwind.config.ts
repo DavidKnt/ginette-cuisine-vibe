@@ -35,6 +35,7 @@ export default {
 					navy: '#1C2541',
 					burgundy: '#8B2635',
 					charcoal: '#333333',
+					blue: '#6a9ad0',
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
