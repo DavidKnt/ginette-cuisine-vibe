@@ -13,6 +13,9 @@ const Navigation = () => {
       setScrolled(window.scrollY > 20);
     };
     
+    // Add immediate check on mount
+    handleScroll();
+    
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
